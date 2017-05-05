@@ -28,8 +28,8 @@ public class Config  {
         catch (IOException e) {
             e.printStackTrace();
         }
-        GeoJson[] predictedData = new GeoJson[87];
-        for (int index = 1; index < 87; index++){
+        GeoJson[] predictedData = new GeoJson[169];
+        for (int index = 1; index < 169; index++){
             
             try(InputStream is = ClassLoader.class.getResourceAsStream("/data/frame_" + index + ".json")){
                 predictedData[index -1] = om.readValue(is, GeoJson.class);
