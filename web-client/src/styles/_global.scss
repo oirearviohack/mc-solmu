@@ -1,0 +1,35 @@
+// ---
+// GLOBAL
+//
+// Global styles and typography definitions
+// ---
+
+// Font imports
+
+// Layout
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+// Typography
+
+body {
+  font-family: sans-serif;
+  font-size: $base-font-size;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Remove default button styles for accessibility
+button {
+  display: inline-block;
+  padding: 0;
+  border: 0;
+  margin: 0;
+
+  font-size: 1em;
+  color: inherit;
+  background: none;
+}

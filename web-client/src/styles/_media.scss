@@ -1,0 +1,51 @@
+// ---
+// MEDIA
+//
+// Media query mixins
+// ---
+
+$breakpoint: (
+  sm: 768px,
+  md: 1024px,
+  lg: 1200px,
+  xl: 1549px
+) !default;
+
+// Min-width queries
+
+@mixin from($bp) {
+  @if map-has-key($breakpoint, $bp) {
+    @media screen and (min-width: #{map-get($breakpoint, $bp)}) {
+      @content;
+    }
+  }
+  @else {
+    @warn "There is no breakpoint `#{$bp}` in $breakpoints!";
+  }
+}
+
+// Max-width queries
+
+@mixin to($bp) {
+  @if map-has-key($breakpoint, $bp) {
+    @media screen and (max-width: #{map-get($breakpoint, $bp)}) {
+      @content;
+    }
+  }
+  @else {
+    @warn "There is no breakpoint `#{$bp}` in $breakpoints!";
+  }
+}
+
+// From-to queries
+
+@mixin from-to($from, $to) {
+  @if map-has-key($breakpoint, $from) and map-has-key($breakpoint, $to) {
+    @media screen and (min-width: #{map-get($breakpoint, $from)}) and (max-width: #{map-get($breakpoint, $to)}) {
+      @content;
+    }
+  }
+  @else {
+    @warn "Invalid from-to query!";
+  }
+}

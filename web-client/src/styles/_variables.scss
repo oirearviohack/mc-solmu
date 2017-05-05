@@ -1,0 +1,36 @@
+// ---
+// Variables
+//
+// Global variables
+// ---
+
+// Colors
+
+$black: #000;
+$dusty-gray: #999;
+$silver: #ccc;
+$white: #fff;
+
+// Responsivity
+
+$base-font-size: 16px;
+$content-max-width: 112.5em;
+
+$breakpoint: (
+  sm: 37.5em, // 600px - tablet portrait
+  md: 56.25em, // 900px - tablet landscape
+  lg: 75em, // 1200px - desktop
+  xlg: 112.5em // 1600px - large desktop
+);
+
+// Flexbox grid
+
+$breakpoints: xs 0 100%, sm 37.5em 100%, md 56.25em 100%, lg 75em 100%, xlg 112.5em 100%;
+$grid-columns: 12;
+$gutter-width: 1rem;
+$outer-margin: 0rem;
+$flexboxgrid-max-width: 100%;
+
+// Normalize settings
+
+$legacy_browser_support: false;

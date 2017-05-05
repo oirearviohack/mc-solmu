@@ -1,0 +1,30 @@
+// ---
+// Utility
+//
+// Utility classes.
+// ---
+
+.wrapper {
+  width: 100%;
+  max-width: $content-max-width;
+  padding: 0 1rem;
+  margin: 0 auto;
+
+  @include from(lg) {
+    padding: 0;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  transform: translateZ(0);
+
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  margin: -1px;
+
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
