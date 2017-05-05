@@ -16,3 +16,5 @@ npm-debug.log*
 
 ### Eclipse ###
 .project
+geometry/.classpath
+geometry/.settings/org.eclipse.buildship.core.prefs
