@@ -1,10 +1,15 @@
 package fi.oda.dss.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import fi.oda.dss.service.EpidemicService;
+import fi.oda.dss.DssParameters;
+import fi.oda.dss.service.DssService;
 
 
 @RestController
@@ -16,8 +21,17 @@ public class DssController {
         this.dssService = dssService;
     }
     
-    @RequestMapping("/")
-    public String getDss(@RequestParam String epidemicLevel){
-        return "";
+    @PostMapping("/dss")
+    public Map<Boolean, String> getDss(@RequestBody DssParameters dssParameters){
+        Optional<String> action = dssService.inferAction(dssParameters.epidemicLevel, 
+                                      dssParameters.age, 
+                                      dssParameters.healthLevel);
+        Map<Boolean, String> result = new HashMap<Boolean, String>();
+        if (action.isPresent()){
+            result.put(true, action.get());
+        }else{
+            result.put(false, "");
+        }
+        return result;
     }
 }
