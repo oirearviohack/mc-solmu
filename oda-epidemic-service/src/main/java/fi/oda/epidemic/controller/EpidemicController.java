@@ -15,7 +15,7 @@ public class EpidemicController {
     public EpidemicController(EpidemicService epidemicService){
         this.epidemicService = epidemicService;
     }
-    
+    @CrossOrigin
     @RequestMapping("/epidemic-level")
     public String getEpidemicLevel(@RequestParam String lat, @RequestParam String lon, @RequestParam String t){
         double latitude = Double.parseDouble(lat);
