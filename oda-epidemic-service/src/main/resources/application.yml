@@ -1,0 +1,18 @@
+#logging:
+#    level:
+  #    ROOT: DEBUG
+#    ca.uhn.fhir.rest.server: DEBUG
+
+server:
+    port: 6085
+    use-forward-headers: true
+    session:
+        cookie:
+            http-only: true
+    contextPath: /
+    
+spring:
+    application:
+        name: phr
+    profiles:
+        active: dev
