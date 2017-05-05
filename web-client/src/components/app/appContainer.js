@@ -2,13 +2,16 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import App from './appComponent'
 import {toggleNavigation} from '../ui/uiReducer'
+import {getEpidemicLocationData} from '../epidemic/epidemicReducer'
 
 const mapStateToProps = state => ({
-  isNavigationOpen: state.ui.isNavigationOpen
+  isNavigationOpen: state.ui.isNavigationOpen,
+  epidemicLocationData: state.epidemic.epidemicLocationData
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  toggleNavigation
+  toggleNavigation,
+  getEpidemicLocationData
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

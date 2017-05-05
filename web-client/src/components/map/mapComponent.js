@@ -7,7 +7,7 @@ import OpenLayersMap from './openLayersMap'
 
 export default class Map extends React.Component {
   static propTypes = {
-    data: PropTypes.array.isRequired
+    data: PropTypes.object
   }
 
   containerId = 'js-map' + new Date().getTime()

@@ -4,12 +4,14 @@ import {createBrowserHistory} from 'history'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 import ui from './components/ui/uiReducer'
+import epidemic from './components/epidemic/epidemicReducer'
 
 import {preloadIcons} from './components/ui/icon/iconUtils'
 
 // Combine all our reducers to one root reducer
 const rootReducer = combineReducers({
-  ui
+  ui,
+  epidemic
 })
 
 // Redux devtools composer

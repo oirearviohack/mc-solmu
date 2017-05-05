@@ -6,25 +6,39 @@ import Slideout from '../ui/slideout/slideoutComponent'
 import Navigation from '../navigation/navigationComponent'
 import Map from '../map/mapComponent'
 
-const App = ({toggleNavigation, isNavigationOpen}) => (
-  <div className="app-AppContainer">
-    <Slideout menuComponent={Navigation} onTranslateEnd={toggleNavigation} isOpen={isNavigationOpen}>
-      <main className="app-MainContent">
-        <HeaderContainer />
+export default class App extends React.Component {
+  static propTypes = {
+    toggleNavigation: PropTypes.func.isRequired,
+    isNavigationOpen: PropTypes.bool.isRequired,
+    getEpidemicLocationData: PropTypes.func.isRequired,
+    epidemicLocationData: PropTypes.object
+  }
 
-        <section className="app-PageContent">
+  render() {
+    const {
+      toggleNavigation,
+      isNavigationOpen,
+      epidemicLocationData
+    } = this.props
 
-          <Map data={[]} />
+    return (
+      <div className="app-AppContainer">
+        <Slideout menuComponent={Navigation} onTranslateEnd={toggleNavigation} isOpen={isNavigationOpen}>
+          <main className="app-MainContent">
+            <HeaderContainer />
 
-        </section>
-      </main>
-    </Slideout>
-  </div>
-)
+            <section className="app-PageContent">
 
-App.propTypes = {
-  toggleNavigation: PropTypes.func.isRequired,
-  isNavigationOpen: PropTypes.bool.isRequired
+              <Map data={epidemicLocationData} />
+
+            </section>
+          </main>
+        </Slideout>
+      </div>
+    )
+  }
+
+  componentDidMount() {
+    this.props.getEpidemicLocationData()
+  }
 }
-
-export default App

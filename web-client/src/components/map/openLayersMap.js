@@ -1,5 +1,5 @@
-import ol from 'openlayers'
 import R from 'ramda'
+import ol from './openlayers'
 
 const formatFeature = feature => {
   const {coordinates, type} = feature.geometry
@@ -13,20 +13,12 @@ const formatFeature = feature => {
   }
 }
 
-const formatFeatures = features => R.map(formatFeature)
+const formatFeatures = R.map(formatFeature)
 
 const formatData = data => ({
   ...data,
   features: formatFeatures(data.features)
 })
-
-const formatter = new ol.format.GeoJSON()
-
-export const rawFeatureDataToVectorSourceFeatures = R.pipe(
-  formatData,
-  formatter.readFeatures
-)
-
 
 export const getStyleByFeatureType = (styles, feature) => styles[feature.getGeometry().getType()]
 
@@ -42,7 +34,7 @@ export default class OpenLayersMap {
       'Point': new ol.style.Style({image})
     }
 
-    const vectorSourceOptions = rawFeatureData && !R.empty(rawFeatureData) ?
+    const vectorSourceOptions = rawFeatureData ?
       {features: rawFeatureDataToVectorSourceFeatures(rawFeatureData)} :
       {}
 
@@ -74,12 +66,12 @@ export default class OpenLayersMap {
   }
 
   updateVectorSource = rawFeatureData => {
-    if (!rawFeatureData || R.empty(rawFeatureData)) {
+    if (!rawFeatureData) {
       return
     }
 
-    const features = rawFeatureDataToVectorSourceFeatures(rawFeatureData)
+    const formattedFeatures = formatData(rawFeatureData)
     this.vectorSource.clear()
-    this.vectorSource.addFeatures(features)
+    this.vectorSource.addFeatures(new ol.format.GeoJSON().readFeatures(formattedFeatures))
   }
 }
