@@ -69,7 +69,7 @@ export default class OpenLayersMap {
         }
       }),
       view: new ol.View({
-        center: ol.proj.fromLonLat([25.013974117045205, 62.516839522085604]),
+        center: ol.proj.fromLonLat([24.80835953847857, 60.41412413929856]),
         zoom: 9
       })
     })
@@ -88,17 +88,17 @@ export default class OpenLayersMap {
   pointsOfInterest = {
     type: 'FeatureCollection',
     crs: {
-        type: 'name',
-        properties: {
-            name: 'EPSG:4326'
-        }
+      type: 'name',
+      properties: {
+        name: 'EPSG:4326'
+      }
     },
     features: [
       {
         type: 'Feature',
         geometry: {
-          type: 'Home',
-          coordinates: ol.proj.fromLonLat([24.80835953847857, 60.41412413929856])
+          type: 'Point',
+          coordinates: ol.proj.fromLonLat([44.80835953847857, 70.41412413929856])
         },
         properties: {
           name: 'Home location'
@@ -114,6 +114,6 @@ export default class OpenLayersMap {
     const formattedFeatures = formatData(rawFeatureData)
     this.vectorSource.clear()
     this.vectorSource.addFeatures(new ol.format.GeoJSON().readFeatures(formattedFeatures))
-    this.vectorSource.addFeatures(new ol.format.GeoJSON().readFeatures(this.pointsOfInterest))
+    //this.vectorSource.addFeature(new ol.format.GeoJSON().readFeature(this.pointsOfInterest))
   }
 }
