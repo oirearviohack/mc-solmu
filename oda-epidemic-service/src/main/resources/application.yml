@@ -13,6 +13,6 @@ server:
     
 spring:
     application:
-        name: phr
+        name: oda-epidemic-service
     profiles:
         active: dev
