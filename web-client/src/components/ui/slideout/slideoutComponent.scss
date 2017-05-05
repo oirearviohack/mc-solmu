@@ -1,0 +1,50 @@
+@import '../../../styles/variables';
+
+.slideout-Slideout {
+  .slideout-menu {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+
+    display: none;
+    width: 16em;
+    min-height: 100vh;
+
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    z-index: 0;
+
+    background: $black;
+    color: $white;
+  }
+
+  .slideout-menu-left {
+    right: auto;
+    left: 0;
+  }
+
+  .slideout-menu-right {
+    right: 0;
+    left: auto;
+  }
+
+  .slideout-panel {
+    position: relative;
+    z-index: 1;
+
+    min-height: 100vh;
+
+    will-change: transform;
+    touch-action: manipulation;
+  }
+}
+
+.slideout-open,
+.slideout-open body,
+.slideout-open .slideout-panel {
+  overflow: hidden;
+}
+
+.slideout-open .slideout-menu {
+  display: block;
+}

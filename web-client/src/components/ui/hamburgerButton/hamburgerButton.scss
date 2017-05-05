@@ -1,0 +1,57 @@
+@import '../../../styles/variables';
+
+$hamburger-width: 2em;
+
+.hbg-Button {
+  position: relative;
+
+  width: $hamburger-width;
+  height: 1.5em;
+
+  font-size: 1em;
+}
+
+.hbg-Button_Line {
+  position: absolute;
+  left: 50%;
+
+  display: inline-block;
+  width: $hamburger-width;
+  height: 0.1875em;
+  margin-left: -($hamburger-width/2);
+
+  background: currentColor;
+
+  transition: all 300ms ease-out;
+}
+
+.hbg-Button_Line-top {
+  top: 0%;
+  transform: translateY(0%);
+}
+
+.hbg-Button_Line-middle {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.hbg-Button_Line-bottom {
+  bottom: 0%;
+  transform: translateY(0%);
+}
+
+.hbg-Button.is-Open {
+  .hbg-Button_Line-top {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+  }
+
+  .hbg-Button_Line-middle {
+    opacity: 0;
+  }
+
+  .hbg-Button_Line-bottom {
+    bottom: 50%;
+    transform: translateY(50%) rotate(-45deg);
+  }
+}
