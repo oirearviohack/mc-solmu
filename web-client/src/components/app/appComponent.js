@@ -4,6 +4,7 @@ import './appComponent.scss'
 import HeaderContainer from '../header/headerContainer'
 import Slideout from '../ui/slideout/slideoutComponent'
 import Navigation from '../navigation/navigationComponent'
+import Map from '../map/mapComponent'
 
 const App = ({toggleNavigation, isNavigationOpen}) => (
   <div className="app-AppContainer">
@@ -12,14 +13,9 @@ const App = ({toggleNavigation, isNavigationOpen}) => (
         <HeaderContainer />
 
         <section className="app-PageContent">
-          <pre>
-            &nbsp;&nbsp;&nbsp;&nbsp;_____________<br />
-            &nbsp;&nbsp;&nbsp;|             |<br />
-            &nbsp;&nbsp;&nbsp;| Hello, App! |<br />
-            &nbsp;&nbsp;&nbsp;|             |<br />
-            &nbsp;&nbsp;&nbsp;/&#8254;&#8254;&#8254;&#8254;&#8254;&#8254;&#8254;&#8254;&#8254;&#8254;&#8254;&#8254;&#8254;<br />
-            <span style={{fontSize: '2em'}}>🙋‍♂</span>️
-          </pre>
+
+          <Map data={[]} />
+
         </section>
       </main>
     </Slideout>

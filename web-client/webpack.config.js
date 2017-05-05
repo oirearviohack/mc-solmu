@@ -47,9 +47,7 @@ module.exports = {
         from: 'static',
         to: 'static'
       }
-    ]),
-    // Show flow static type errors
-    new FlowBabelWebpackPlugin()
+    ])
   ],
 
   module: {

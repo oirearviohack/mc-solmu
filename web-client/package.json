@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
-    "start": "webpack-dev-server --progress --port 8080",
-    "start:server": "http-server -a 0.0.0.0 -p 8082 ./dist",
+    "start": "webpack-dev-server --progress --port 8081",
+    "start:server": "http-server -a 0.0.0.0 -p 8081 ./dist",
     "build": "webpack -p --config ./webpack.production.config.js",
     "clean:report": "rimraf ./report",
     "clean": "rimraf ./dist",
