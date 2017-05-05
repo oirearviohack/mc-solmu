@@ -1,0 +1,18 @@
+### OSX ###
+.DS_Store
+
+### Compiled code ###
+__snapshots__/
+dist/
+node_modules/
+report/
+npm-debug.log*
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### Eclipse ###
+.project
