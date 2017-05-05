@@ -19,7 +19,7 @@ public class Config  {
 
     @Bean
     public EpidemicMap epidemicMap() {
-        EpidemicMap epidemicMap = new EpidemicMap(125, 0.55);
+        EpidemicMap epidemicMap = new EpidemicMap(75, 0.55);
         ObjectMapper om = new ObjectMapper();
         try(InputStream is = ClassLoader.class.getResourceAsStream("/data/frame_0.json")){
             epidemicMap.setObservedData(om.readValue(is, GeoJson.class));
