@@ -32,7 +32,9 @@ export default class App extends React.Component {
             <section className="app-PageContent">
 
               <div className="row">
-                <div className="col-xs-6"></div>
+                <div className="col-xs-6">
+
+                </div>
                 <div className="col-xs-6">
                   <Map data={epidemicLocationData} />
                 </div>
