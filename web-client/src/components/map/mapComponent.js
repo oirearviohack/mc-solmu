@@ -27,4 +27,5 @@ export default class Map extends React.Component {
   componentDidMount() {
     this.map = new OpenLayersMap(this.containerId, this.props.data)
   }
+  
 }
