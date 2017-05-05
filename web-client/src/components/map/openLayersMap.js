@@ -72,7 +72,7 @@ export default class OpenLayersMap {
     this.map.on('click', evt => {
       const [lon, lat] = ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326')
       console.log('User has selected his or her location at this point[' + lon + ', ' + lat + ']')
-      dispatchGetEpidemicLevelData(lon, lat)
+      dispatchGetEpidemicLevelData(lat, lon)
     })
   }
 
