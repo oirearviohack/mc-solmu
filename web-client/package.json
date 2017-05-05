@@ -1,5 +1,5 @@
 {
-  "name": "app",
+  "name": "epidemic-web-client",
   "version": "0.0.1",
   "description": "app description",
   "main": "index.js",
@@ -40,7 +40,7 @@
     },
     "testRegex": "\\.test\\.js$"
   },
-  "author": "MC Solita",
+  "author": "MC Solmu",
   "license": "ISC",
   "private": true,
   "devDependencies": {

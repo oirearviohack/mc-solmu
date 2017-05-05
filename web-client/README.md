@@ -1,4 +1,4 @@
-# App
+# epidemic-web-client
 
 ## Installation
 
