@@ -48,4 +48,7 @@ public class Geopoint extends Point2D.Double {
         return angle;
     }
 
+    public String exportGeoJson() {
+        return "[" + x + "," + y + "]";
+    }
 }

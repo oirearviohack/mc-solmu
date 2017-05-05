@@ -2,6 +2,7 @@ package mc.solmu.geometry.util;
 
 import java.awt.Polygon;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class GeopointSet {
     private ArrayList<Geopoint> set;
@@ -28,7 +29,7 @@ public class GeopointSet {
         return set;
     }
 
-    private void add(Geopoint p) {
+    public void add(Geopoint p) {
         set.add(p);
     }
 
@@ -121,4 +122,9 @@ public class GeopointSet {
         return result;
     }
 
+    public String exportGeoPolygon() {
+        return "{\"type\":\"Polygon\", \"coordinates\":[["
+                + set.stream().map(p -> p.exportGeoJson()).collect(Collectors.joining(","))
+                + "]]}";
+    }
 }

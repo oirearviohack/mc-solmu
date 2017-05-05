@@ -25,11 +25,12 @@ public class GeometryMain {
         frame.pack();
         frame.setVisible(true);
         //System.exit(0);
-        panel.syncSet(getGeopointSet(1));
+        //panel.syncSet(getGeopointSet(1));
         //(new Thread(new GeometryMain())).start();
         for (int i = 0; i < 86; i++) {
             panel.syncSet(getGeopointSet(i));
             Thread.sleep(200);
         }
+        //System.out.println(getGeopointSet(30).getConvexHull().exportGeoPolygon());
     }
 }
