@@ -1,7 +1,10 @@
 let frame = 0
 const maxFrame = 85
 
-export const getNextSimulationFrame = () => {
+export const fetchNextSimulationFrame = () => {
   frame = frame > maxFrame ? 0 : frame
   return fetch(`/static/simulations/epidemic1/frame_${frame++}.json`).then(data => data.json())
 }
+
+export const fetchEpidemicLevel = (lat, lon, time) =>
+  fetch(`//0.0.0.0:6085/epidemic-level?lat=${lat}&lon=${lon}&t=${time}`).then(data => data.json())

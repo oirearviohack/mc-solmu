@@ -20,6 +20,7 @@ export default class App extends React.Component {
     const {
       toggleNavigation,
       isNavigationOpen,
+      epidemicLevel,
       epidemicLocationData
     } = this.props
 
@@ -35,7 +36,7 @@ export default class App extends React.Component {
                 <div className="row">
                   <div className="col-xs-6">
                     <div className="pn-Panel">
-
+                      <h1>{epidemicLevel}</h1>
                     </div>
                   </div>
                   <div className="col-xs-6">

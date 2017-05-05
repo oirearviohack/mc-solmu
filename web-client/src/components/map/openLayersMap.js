@@ -1,5 +1,6 @@
 import R from 'ramda'
 import ol from './openlayers'
+import {dispatchGetEpidemicLevelData} from '../epidemic/epidemicUtils'
 
 const formatFeature = feature => {
   const {coordinates, type} = feature.geometry
@@ -63,15 +64,15 @@ export default class OpenLayersMap {
         zoom: 9
       })
     })
+
     this.setUserLocation()
   }
 
   setUserLocation() {
-    this.map.on('click', function(evt) {
-      var lonlat = ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326')
-      var lon = lonlat[0]
-      var lat = lonlat[1]
+    this.map.on('click', evt => {
+      const [lon, lat] = ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326')
       console.log('User has selected his or her location at this point[' + lon + ', ' + lat + ']')
+      dispatchGetEpidemicLevelData(lon, lat)
     })
   }
 

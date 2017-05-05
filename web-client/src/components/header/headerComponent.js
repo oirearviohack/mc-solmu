@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import './headerComponent.scss'
 import Icon from '../ui/icon/iconComponent'
 
-const Header = ({isNavigationOpen, toggleNavigation}) => (
+const Header = ({toggleNavigation}) => (
   <header className="hd-Header">
     <div className="row middle-xs">
       <div className="col-xs-6">
@@ -19,6 +19,7 @@ const Header = ({isNavigationOpen, toggleNavigation}) => (
       <div className="col-xs-6 hd-UserControlsWrapper">
         <button className="hd-UserControls" onClick={toggleNavigation}>
           Omat tietoni
+
           <Icon glyph="avatar" className="hd-UserControls_Button" />
         </button>
       </div>
