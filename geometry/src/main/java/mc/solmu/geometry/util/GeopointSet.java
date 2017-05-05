@@ -34,7 +34,7 @@ public class GeopointSet {
 
     public GeopointSet translateToSwing() {
         GeopointSet copy = new GeopointSet();
-        set.stream().forEach(p -> copy.add(new Geopoint((p.x - 24.9) * 1500 + 50, (p.y - 62.5) * 2000 + 150)));
+        set.stream().forEach(p -> copy.add(new Geopoint((p.x - 24.8) * 1500 + 50, (p.y - 60.4) * 2000 + 400)));
         return copy;
     }
 
@@ -76,10 +76,10 @@ public class GeopointSet {
         int corner = findHullCorner();
         double max = Math.PI * 2;
         result.add(set.get(corner));
-        while (corner > 0) {
+        while (corner >= 0) {
             int previous = corner;
             corner = findBiggestAngle(corner, max);
-            if (corner > 0) {
+            if (corner >= 0) {
                 max = set.get(previous).angle(set.get(corner));
                 result.add(set.get(corner));
             }

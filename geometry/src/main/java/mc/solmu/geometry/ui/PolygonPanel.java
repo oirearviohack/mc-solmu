@@ -24,6 +24,11 @@ public class PolygonPanel extends JPanel {
             draw(g, p, 16);
     }
 
+    public void syncSet(GeopointSet set) {
+        this.points = set.translateToSwing();
+        repaint();
+    }
+
     public void paint(Graphics g) {
         super.paint(g);
         g.setColor(Color.WHITE);
@@ -36,6 +41,8 @@ public class PolygonPanel extends JPanel {
         g.fillPolygon(points.getFraction(50).getConvexHull().getPolygon());
         g.setColor(new Color(128, 0, 0));
         draw(g, points);
+        g.setColor(Color.BLACK);
+        draw(g, points.getFraction(50));
         //g.setColor(Color.BLACK);
         //draw(g, points.getCenter(), 20);
     }
