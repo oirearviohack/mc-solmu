@@ -14,6 +14,8 @@ export default class App extends React.Component {
     epidemicLocationData: PropTypes.object
   }
 
+  pollInterval = null
+
   render() {
     const {
       toggleNavigation,
@@ -29,7 +31,12 @@ export default class App extends React.Component {
 
             <section className="app-PageContent">
 
-              <Map data={epidemicLocationData} />
+              <div className="row">
+                <div className="col-xs-6"></div>
+                <div className="col-xs-6">
+                  <Map data={epidemicLocationData} />
+                </div>
+              </div>
 
             </section>
           </main>
@@ -39,6 +46,14 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getEpidemicLocationData()
+    if (!this.pollInterval) {
+      this.pollInterval = setInterval(this.props.getEpidemicLocationData, 500)
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.pollInterval) {
+      clearInterval()
+    }
   }
 }

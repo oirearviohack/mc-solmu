@@ -35,7 +35,7 @@ export default class OpenLayersMap {
     }
 
     const vectorSourceOptions = rawFeatureData ?
-      {features: rawFeatureDataToVectorSourceFeatures(rawFeatureData)} :
+      {features: new ol.format.GeoJSON().readFeatures(formatData(rawFeatureData))} :
       {}
 
     this.vectorSource = new ol.source.Vector(vectorSourceOptions)
