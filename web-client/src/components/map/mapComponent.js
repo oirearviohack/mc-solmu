@@ -4,6 +4,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import OpenLayersMap from './openLayersMap'
+import './mapComponent.scss'
 
 export default class Map extends React.Component {
   static propTypes = {
@@ -16,13 +17,7 @@ export default class Map extends React.Component {
     this.map.updateVectorSource(nextProps.data)
   }
 
-  render() {
-    return (
-      <div className="map-Map">
-        <div id={this.containerId} />
-      </div>
-    )
-  }
+  render = () => <div className="map-Map" id={this.containerId} />
 
   componentDidMount() {
     this.map = new OpenLayersMap(this.containerId, this.props.data)

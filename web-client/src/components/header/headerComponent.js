@@ -1,15 +1,28 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import './headerComponent.scss'
-import HamburgerButton from '../ui/hamburgerButton/hamburgerButtonComponent'
+import Icon from '../ui/icon/iconComponent'
 
 const Header = ({isNavigationOpen, toggleNavigation}) => (
   <header className="hd-Header">
-    <HamburgerButton isOpen={isNavigationOpen} onClick={toggleNavigation} />
+    <div className="row middle-xs">
+      <div className="col-xs-6">
+        <h1 className="hd-PageTitle">
+          <span className="hd-LogoWrapper">
+            <Icon glyph="donation" className="hd-Logo" />
+          </span>
 
-    <h1 className="hd-PageTitle">
-      App Title
-    </h1>
+          Epidemiakartta
+        </h1>
+      </div>
+
+      <div className="col-xs-6 hd-UserControlsWrapper">
+        <button className="hd-UserControls" onClick={toggleNavigation}>
+          Omat tietoni
+          <Icon glyph="avatar" className="hd-UserControls_Button" />
+        </button>
+      </div>
+    </div>
   </header>
 )
 

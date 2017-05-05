@@ -74,7 +74,8 @@ export default class Slideout extends React.Component {
     this.slideout = new SlideoutJS({
       ...this.options,
       menu: document.getElementById(this.menuId),
-      panel: document.getElementById(this.panelId)
+      panel: document.getElementById(this.panelId),
+      side: 'right'
     })
     this.slideout.on('translateend', () => {
       this.props.onTranslateEnd()
