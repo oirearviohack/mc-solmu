@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +21,7 @@ public class DssController {
     public DssController(DssService dssService){
         this.dssService = dssService;
     }
-    
+    @CrossOrigin 
     @PostMapping("/dss")
     public Map<Boolean, String> getDss(@RequestBody DssParameters dssParameters){
         Optional<String> action = dssService.inferAction(dssParameters.epidemicLevel, 
