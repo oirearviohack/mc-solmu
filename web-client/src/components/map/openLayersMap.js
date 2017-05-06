@@ -32,16 +32,7 @@ export default class OpenLayersMap {
     })
 
     const styles = {
-      'Point': new ol.style.Style({image}),
-      'Home':  new ol.style.Style({
-        image: new ol.style.Icon({
-          anchor: [0.5, 46],
-          anchorXUnits: 'fraction',
-          anchorYUnits: 'pixels',
-          opacity: 0.75,
-          src: '/static/images/home_location.png'
-        })
-      })
+      'Point': new ol.style.Style({image})
     }
 
     const vectorSourceOptions = rawFeatureData ?
@@ -73,7 +64,6 @@ export default class OpenLayersMap {
         zoom: 9
       })
     })
-
     this.setUserLocation()
   }
 
@@ -85,35 +75,35 @@ export default class OpenLayersMap {
     })
   }
 
-  pointsOfInterest = {
-    type: 'FeatureCollection',
-    crs: {
-      type: 'name',
-      properties: {
-        name: 'EPSG:4326'
-      }
-    },
-    features: [
-      {
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: ol.proj.fromLonLat([44.80835953847857, 70.41412413929856])
-        },
-        properties: {
-          name: 'Home location'
-        }
-      }]
-  }
-
   updateVectorSource = rawFeatureData => {
     if (!rawFeatureData) {
       return
     }
 
+    const pointsOfInterest = {
+      geometry: new ol.geom.Point(ol.proj.fromLonLat([24.847530717623886, 60.32469782329352])),
+      properties: {
+        name: 'Home-location'
+      }
+    }
+
     const formattedFeatures = formatData(rawFeatureData)
     this.vectorSource.clear()
     this.vectorSource.addFeatures(new ol.format.GeoJSON().readFeatures(formattedFeatures))
-    //this.vectorSource.addFeature(new ol.format.GeoJSON().readFeature(this.pointsOfInterest))
+
+    var iconFeature = new ol.Feature(pointsOfInterest)
+
+    const iconStyle = new ol.style.Style({
+      image: new ol.style.Icon({
+        anchor: [0.5, 46],
+        anchorXUnits: 'fraction',
+        anchorYUnits: 'pixels',
+        src: '/static/images/home_location.png'
+      })
+    })
+
+    iconFeature.setStyle(iconStyle)
+
+    this.vectorSource.addFeature(iconFeature)
   }
 }
