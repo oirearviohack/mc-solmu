@@ -23,7 +23,7 @@ module.exports = {
   plugins: [
   // Generate index.html
     new HtmlWebpackPlugin({
-      title: 'App Title',
+      title: 'Epidemiakartta',
       template: path.join(__dirname, 'templates', 'app.ejs')
     }),
     // Set NODE_ENV

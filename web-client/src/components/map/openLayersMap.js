@@ -2,7 +2,7 @@ import R from 'ramda'
 import ol from './openlayers'
 import {dispatchGetEpidemicLevelData} from '../epidemic/epidemicUtils'
 
-const formatFeature = feature => {
+const formatPointFeature = feature => {
   const {coordinates, type} = feature.geometry
 
   return {
@@ -14,7 +14,25 @@ const formatFeature = feature => {
   }
 }
 
-const formatFeatures = R.map(formatFeature)
+const coordinateMatricetoLonLat = R.map(R.map(ol.proj.fromLonLat))
+
+const formatPolygonFeature = feature => {
+  const {coordinates, type} = feature.geometry
+
+  return {
+    ...feature,
+    geometry: {
+      coordinates: coordinateMatricetoLonLat(coordinates),
+      type
+    }
+  }
+}
+
+const formatFeatures = R.ifElse(
+  R.pathEq([0, 'geometry', 'type'], 'Polygon'),
+  R.map(formatPolygonFeature),
+  R.map(formatPointFeature)
+)
 
 const formatData = data => ({
   ...data,
@@ -122,6 +140,7 @@ export default class OpenLayersMap {
     }
 
     const formattedFeatures = formatData(rawFeatureData)
+
     this.vectorSource.clear()
     this.vectorSource.addFeatures(new ol.format.GeoJSON().readFeatures(formattedFeatures))
 

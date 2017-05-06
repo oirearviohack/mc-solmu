@@ -13,7 +13,7 @@ const POSTHeaders =  {
 
 export const fetchNextSimulationFrame = () => {
   frame = frame > maxFrame ? 0 : frame
-  return fetch(`/static/simulations/epidemic2/frame_${frame++}.json`).then(data => data.json())
+  return fetch(`/static/simulations/epidemic3/polys100_${frame++}.json`).then(data => data.json())
 }
 
 export const fetchEpidemicLevel = (lat, lon, time) =>
@@ -25,12 +25,12 @@ const parseDSSResult = R.pipe(
 )
 
 export const queryDSS = (epidemicLevel, age, healthLevel) => fetch('//0.0.0.0:6086/dss', {
-    ...POSTHeaders,
-    body: JSON.stringify({
-      epidemicLevel: [epidemicLevel],
-      age: 50,
-      healthLevel: 5
-    })
+  ...POSTHeaders,
+  body: JSON.stringify({
+    epidemicLevel: [epidemicLevel],
+    age: 50,
+    healthLevel: 5
   })
+})
   .then(data => data.json())
   .then(parseDSSResult)

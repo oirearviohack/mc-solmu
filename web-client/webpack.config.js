@@ -38,7 +38,7 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     // Generate index.html
     new HtmlWebpackPlugin({
-      title: 'App Title',
+      title: 'Epidemiakartta',
       template: path.join(__dirname, 'templates', 'app.ejs')
     }),
     // Move static files

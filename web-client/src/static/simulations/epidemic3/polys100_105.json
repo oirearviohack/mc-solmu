@@ -1,0 +1,1 @@
+{"type": "FeatureCollection","features": [{"type":"Feature","geometry":{"type":"Polygon", "coordinates":[[[24.9056815,60.213297],[24.9321664,60.22170852],[24.9145098,60.25956036],[24.8880249,60.272177639999995],[24.86154,60.25956036],[24.9056815,60.213297]]]},"properties":{"name":"convex hull"}}]}
