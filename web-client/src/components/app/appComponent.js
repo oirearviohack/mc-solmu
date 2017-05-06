@@ -13,7 +13,8 @@ export default class App extends React.Component {
     isNavigationOpen: PropTypes.bool.isRequired,
     getEpidemicLocationData: PropTypes.func.isRequired,
     epidemicLocationData: PropTypes.object,
-    DSSData: PropTypes.string
+    DSSData: PropTypes.string,
+    isLoadingDSSData: PropTypes.bool.isRequired
   }
 
   pollInterval = null
@@ -22,7 +23,6 @@ export default class App extends React.Component {
     const {
       toggleNavigation,
       isNavigationOpen,
-      epidemicLevel,
       epidemicLocationData,
       DSSData
     } = this.props
@@ -40,8 +40,10 @@ export default class App extends React.Component {
                   <div className="col-xs-6">
                     <Panel>
                       {
-                        DSSData && (
+                        DSSData ? (
                           <h1 className="animated fadeIn">{DSSData}</h1>
+                        ) : (
+                          <p className="animated fadeIn">Toimenpiteitä ei tarvita</p>
                         )
                       }
                     </Panel>

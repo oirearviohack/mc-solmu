@@ -8,7 +8,8 @@ const mapStateToProps = state => ({
   isNavigationOpen: state.ui.isNavigationOpen,
   epidemicLocationData: state.epidemic.epidemicLocationData,
   epidemicLevel: state.epidemic.epidemicLevel,
-  DSSData: state.epidemic.DSSData
+  DSSData: state.epidemic.DSSData,
+  isLoadingDSSData: state.epidemic.isLoadingDSSData
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
