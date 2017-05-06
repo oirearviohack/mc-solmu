@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class OdaEpidemicServiceApplication {
+public class OdaDssServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(OdaEpidemicServiceApplication.class, args);
+        SpringApplication.run(OdaDssServiceApplication.class, args);
     }
 }

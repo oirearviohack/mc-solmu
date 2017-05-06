@@ -63,5 +63,17 @@ public class EpidemicMap implements Runnable{
         // TODO Auto-generated method stub
         
     }
+    public Double[] simulateAll(double latitude, double longitude, int t) {
+        Double[] result = new Double[simulated.length- t];
+        int i;
+        if (t >= simulated.length){
+            t = simulated.length - 1;
+        }
+        for (i = t; i < simulated.length; i++){
+            result[i -t] = simulate(latitude, longitude, i);
+        }
+        return result;
+
+    }
     
 }

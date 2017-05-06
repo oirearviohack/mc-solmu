@@ -24,4 +24,11 @@ public class EpidemicController {
         int time = Integer.parseUnsignedInt(t);
         return String.valueOf(epidemicService.calcEpidemicLevel(latitude, longitude, time));
     }
+    @CrossOrigin
+    @RequestMapping("/epidemic-level/all")
+    public Double[] getEpidemicLevelAll(@RequestParam String lat, @RequestParam String lon, @RequestParam String t){
+        double latitude = Double.parseDouble(lat);
+        double longitude = Double.parseDouble(lon);
+        return epidemicService.calcEpidemicLevelAll(latitude, longitude, Integer.parseUnsignedInt(t));
+    }
 }

@@ -36,11 +36,11 @@ public class DssService {
     public Optional<String> inferAction(double[] epidemicLevel, int age, int health) {        
         // TODO: use inference engine to determine action
         double currentLevel = findMax(0, 1, epidemicLevel);
-        
+        int lastIndex = epidemicLevel.length - 1;
         EpidemicSituation situation = EpidemicSituation.NO_EPIDEMIC;   
         if (currentLevel > 0.5){
             situation = EpidemicSituation.ONGOING;
-        }else if (findMax(0, 10, epidemicLevel) > 0.5){
+        }else if (findMax(0, lastIndex, epidemicLevel) > 0.5){
             situation = EpidemicSituation.EXPECTED;
         }
         int riskGroup = 0;

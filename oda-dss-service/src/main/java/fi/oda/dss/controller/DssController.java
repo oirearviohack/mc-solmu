@@ -21,6 +21,7 @@ public class DssController {
     public DssController(DssService dssService){
         this.dssService = dssService;
     }
+
     @CrossOrigin 
     @PostMapping("/dss")
     public Map<Boolean, String> getDss(@RequestBody DssParameters dssParameters){
