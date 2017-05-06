@@ -21,19 +21,25 @@ public class DssService {
     public DssService(){
         actions = new HashMap<Integer, Map<EpidemicSituation, String>>();
         Map<EpidemicSituation, String> lowRiskGroup =new HashMap<EpidemicSituation, String>();
-        lowRiskGroup.put(EpidemicSituation.EXPECTED, "Alueellasi on mahdollisesti alkamassa epidemia %t. Muista pestä kädet säännöllisesti.");
-        lowRiskGroup.put(EpidemicSituation.ONGOING, "Alueellasi on meneillään epidemia. Muista pestä kädet säännöllisesti.");
+        lowRiskGroup.put(EpidemicSituation.EXPECTED, "<p>Alueellasi on mahdollisesti alkamassa epidemia %t. Muista pestä kädet säännöllisesti.</p>"+
+                "<p>Lue lisätietoa Noroviruksesta <a href=\"http://www.terveyskirjasto.fi/terveyskirjasto/tk.koti?p_artikkeli=dlk00738\" target=\"_blank\">Terveyskirjastosta</a>.</p>");
+        lowRiskGroup.put(EpidemicSituation.ONGOING, "<p>Alueellasi on meneillään norovirusepidemia. Muista pestä kädet säännöllisesti.</p>"+
+                "<p>Lue lisätietoa Noroviruksesta <a href=\"http://www.terveyskirjasto.fi/terveyskirjasto/tk.koti?p_artikkeli=dlk00738\" target=\"_blank\">Terveyskirjastosta</a>.</p>");
         Map<EpidemicSituation, String> mediumRiskGroup =new HashMap<EpidemicSituation, String>();
         mediumRiskGroup.put(EpidemicSituation.EXPECTED, 
-                "Alueellasi on mahdollisesti alkamassa epidemia %t. Muista pestä kädet säännöllisesti ja käyttää käsidesiä.");
-        mediumRiskGroup.put(EpidemicSituation.ONGOING, "Alueellasi on meneillään epidemia. Muista pestä kädet säännöllisesti ja käyttää käsidesiä.");    
+                "<p>Antamiesi tietojen perusteella kuulut riskiryhmään.</p>"+
+                "<p>Alueellasi on mahdollisesti alkamassa epidemia %t. Muista pestä kädet säännöllisesti ja käyttää käsidesiä.</p>"+
+                "<p>Lue lisätietoa Noroviruksesta <a href=\"http://www.terveyskirjasto.fi/terveyskirjasto/tk.koti?p_artikkeli=dlk00738\" target=\"_blank\">Terveyskirjastosta</a>.</p>");
+        mediumRiskGroup.put(EpidemicSituation.ONGOING, "<p>Antamiesi tietojen perusteella kuulut riskiryhmään.</p><p>Alueellasi on meneillään norovirusepidemia. Muista pestä kädet säännöllisesti ja käyttää käsidesiä.</p>");    
         Map<EpidemicSituation, String> highRiskGroup =new HashMap<EpidemicSituation, String>();
         highRiskGroup.put(EpidemicSituation.EXPECTED, 
-                "Alueellasi on mahdollisesti alkamassa epidemia %t. Muista pestä kädet säännöllisesti ja käyttää käsidesiä. "+
-                "Vältä kontaktia sairastuneiden perheenjäsenten kanssa. Oireiden ilmetessä hakeudu lääkärihoitoon.");
+                "<p>Antamiesi tietojen perusteella kuulut korkean riskin ryhmään.</p><p>Alueellasi on mahdollisesti alkamassa norovirusepidemia %t. </p><p>Muista pestä kädet säännöllisesti ja käyttää käsidesiä. "+
+                "Vältä kontaktia sairastuneiden perheenjäsenten kanssa. </p><p><strong>Oireiden ilmetessä hakeudu lääkärihoitoon.</strong></p>"+
+                "<p>Lue lisätietoa Noroviruksesta <a href=\"http://www.terveyskirjasto.fi/terveyskirjasto/tk.koti?p_artikkeli=dlk00738\" target=\"_blank\">Terveyskirjastosta</a>.</p>");
         highRiskGroup.put(EpidemicSituation.ONGOING, 
-                "Alueellasi on meneillään epidemia. Muista pestä kädet säännöllisesti ja käyttää käsidesiä. "+
-                "Vältä kontaktia sairastuneiden perheenjäsenten kanssa. Oireiden ilmetessä hakeudu lääkärihoitoon.");
+                "<p>Antamiesi tietojen perusteella kuulut korkean riskin ryhmään.</p><p>Alueellasi on meneillään norovirusepidemia. </p><p>Muista pestä kädet säännöllisesti ja käyttää käsidesiä. "+
+                "Vältä kontaktia sairastuneiden perheenjäsenten kanssa. </p><p><strong>Oireiden ilmetessä hakeudu lääkärihoitoon.</strong></p>"+
+                "<p>Lue lisätietoa Noroviruksesta <a href=\"http://www.terveyskirjasto.fi/terveyskirjasto/tk.koti?p_artikkeli=dlk00738\" target=\"_blank\">Terveyskirjastosta</a>.</p>");
         
         actions.put(0, lowRiskGroup);
         actions.put(1, mediumRiskGroup);
