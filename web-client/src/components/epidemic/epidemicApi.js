@@ -27,8 +27,8 @@ export const queryDSS = (epidemicLevel, age, healthLevel) => fetch('//localhost:
   ...POSTHeaders,
   body: JSON.stringify({
     epidemicLevel: [epidemicLevel],
-    age: 50,
-    healthLevel: 5
+    age,
+    healthLevel
   })
 })
   .then(data => data.json())

@@ -24,7 +24,7 @@ export default class UserProfile extends React.Component {
   }
 
   onUpdateUserData = () => {
-    onUpdateUserData({
+    this.props.updateUserData({
       age: this.ageInput.value,
       healthLevel: this.healthInput.value
     })
