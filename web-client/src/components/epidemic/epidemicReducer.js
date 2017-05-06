@@ -170,6 +170,6 @@ export const updateUserData = data => {
     const {epidemic: {epidemicLevel}} = getState()
     dispatch(setUserData(data))
     dispatch(postDSSData(epidemicLevel))
-    dispatch(postDSSDataForHome(epidemicLevel))
+    dispatch(getEpidemicLocationDataForHomeLocation())
   }
 }
