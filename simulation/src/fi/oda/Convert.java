@@ -15,10 +15,20 @@ import java.util.stream.Stream;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+/**
+ * This project converts the output of the NetLogo simulation to GeoJson. The project
+ * reads csv files written with NetLogo command "export-world". Turtles with 
+ * color 15 are selected. Data is transformed to given coordinates.
+ * 
+ * Usage:
+ * Convert lat_min lon_min lat_max lon_max data_min_x data_min_y data_max_x data_max_y
+ * 
+ * Example:
+ * Convert 60.213297 24.684974 60.423585 25.126389 -25.0 -25.0 25.0 25.0
+ * 
+ */
 public class Convert {
     static ObjectMapper om = new ObjectMapper();
-   // static final String MARKER_LINE = "\"\"\"Infected\"\"\",,,,\"\"\"Not Infected\"\"\"";
     static final String MARKER_LINE_START = "\"TURTLES\"";
     static final String MARKER_LINE_END = "\"PATCHES\"";
     static final String DATA_PATH = "data";
