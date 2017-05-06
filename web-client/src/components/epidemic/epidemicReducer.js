@@ -17,7 +17,8 @@ const initialState = {
   userData: {
     address: 'Mustankivenkuja 5, Espoo',
     healthLevel: 5,
-    age: 80
+    age: 80,
+    email: 'antti.biootti@gmail.com'
   }
 }
 

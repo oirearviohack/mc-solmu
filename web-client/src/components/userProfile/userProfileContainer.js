@@ -6,7 +6,8 @@ import {updateUserData} from '../epidemic/epidemicReducer'
 const mapStateToProps = state => ({
   address: state.epidemic.userData.address,
   healthLevel: state.epidemic.userData.healthLevel,
-  age: state.epidemic.userData.age
+  age: state.epidemic.userData.age,
+  email: state.epidemic.userData.email
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
