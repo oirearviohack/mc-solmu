@@ -28,7 +28,7 @@ public class Config  {
     @Bean
     public EpidemicMap epidemicMap() {
 
-        EpidemicMap epidemicMap = new EpidemicMap(12, 0.22);
+        EpidemicMap epidemicMap = new EpidemicMap(12, 0.05);
         ObjectMapper om = new ObjectMapper();
         try (BufferedReader reader = new BufferedReader(
                 new InputStreamReader(new ClassPathResource(Paths.get("data/frame_0.json").toString()).getInputStream(), Charset.forName("UTF-8")))) {
