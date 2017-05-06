@@ -16,7 +16,7 @@ import fi.oda.dss.EpidemicSituation;
 public class DssService {
     private Map<Integer, Map<EpidemicSituation, String>> actions;
     
-    private double timestepHours = 1.0;
+    private double timestepHours = 2.0;
     
     public DssService(){
         actions = new HashMap<Integer, Map<EpidemicSituation, String>>();
