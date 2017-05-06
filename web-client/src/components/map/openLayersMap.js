@@ -154,16 +154,15 @@ export default class OpenLayersMap {
     }
 
     const formattedFeatures = formatData(rawFeatureData)
-
-    this.vectorSource.clear()
     this.vectorSource.addFeatures(new ol.format.GeoJSON().readFeatures(formattedFeatures))
   }
 
   updateMap = dataSets => {
-    if (!dataSets || R.empty(dataSets)) {
+    if (!dataSets || R.isEmpty(dataSets)) {
       return
     }
 
+    this.vectorSource.clear()
     dataSets.map(this.updateDataLayer)
     this.updateHomePin()
   }
