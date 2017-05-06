@@ -44,10 +44,16 @@ export default class OpenLayersMap {
       {}
 
     this.vectorSource = new ol.source.Vector(vectorSourceOptions)
+    this.vectorSourcePinned = new ol.source.Vector()
 
     this.vectorLayer = new ol.layer.Vector({
       source: this.vectorSource,
       style: R.curry(getStyleByFeatureType)(styles)
+    })
+
+    this.vectorLayerPinned = new ol.layer.Vector({
+      source: this.vectorSourcePinned,
+      //style: R.curry(getStyleByFeatureType)(styles)
     })
 
     this.map = new ol.Map({
@@ -55,7 +61,8 @@ export default class OpenLayersMap {
         new ol.layer.Tile({
           source: new ol.source.OSM()
         }),
-        this.vectorLayer
+        this.vectorLayer,
+        this.vectorLayerPinned
       ],
       target: selector,
       controls: ol.control.defaults({
@@ -75,6 +82,29 @@ export default class OpenLayersMap {
     this.map.on('click', evt => {
       const [lon, lat] = ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326')
       console.log('User has selected his or her location at this point[' + lon + ', ' + lat + ']')
+
+      const userLocationPinned = {
+        geometry: new ol.geom.Point(ol.proj.fromLonLat([lon, lat])),
+        properties: {
+          name: 'pinned-location'
+        }
+      }
+
+      var iconFeature = new ol.Feature(userLocationPinned)
+
+      const iconStyle = new ol.style.Style({
+        image: new ol.style.Icon({
+          anchor: [0.5, 30],
+          anchorXUnits: 'fraction',
+          anchorYUnits: 'pixels',
+          src: '/static/images/pin.png'
+        })
+      })
+
+      iconFeature.setStyle(iconStyle)
+      this.vectorSourcePinned.clear()
+      this.vectorSourcePinned.addFeature(iconFeature)
+
       dispatchGetEpidemicLevelData(lat, lon)
     })
   }
