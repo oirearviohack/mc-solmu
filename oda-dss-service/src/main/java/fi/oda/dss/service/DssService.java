@@ -21,24 +21,31 @@ public class DssService {
     public DssService(){
         actions = new HashMap<Integer, Map<EpidemicSituation, String>>();
         Map<EpidemicSituation, String> lowRiskGroup =new HashMap<EpidemicSituation, String>();
-        lowRiskGroup.put(EpidemicSituation.EXPECTED, "<p>Alueellasi on mahdollisesti alkamassa norovirusepidemia %t. Muista pestä kädet säännöllisesti.</p>"+
+        lowRiskGroup.put(EpidemicSituation.EXPECTED, "<p>Alueellasi on mahdollisesti alkamassa norovirusepidemia %t.</p>"+
+                "<p>Muista pestä kädet säännöllisesti.</p>"+
                 "<p>Lue lisätietoa noroviruksesta <a href=\"http://www.terveyskirjasto.fi/terveyskirjasto/tk.koti?p_artikkeli=dlk00738\" target=\"_blank\">Terveyskirjastosta</a>.</p>");
-        lowRiskGroup.put(EpidemicSituation.ONGOING, "<p>Alueellasi on meneillään norovirusepidemia. Muista pestä kädet säännöllisesti.</p>"+
+        lowRiskGroup.put(EpidemicSituation.ONGOING, "<p>Alueellasi on meneillään norovirusepidemia.</p>"+
+                "<p>Muista pestä kädet säännöllisesti.</p>"+
                 "<p>Lue lisätietoa noroviruksesta <a href=\"http://www.terveyskirjasto.fi/terveyskirjasto/tk.koti?p_artikkeli=dlk00738\" target=\"_blank\">Terveyskirjastosta</a>.</p>");
         Map<EpidemicSituation, String> mediumRiskGroup =new HashMap<EpidemicSituation, String>();
         mediumRiskGroup.put(EpidemicSituation.EXPECTED, 
-                "<p>Antamiesi tietojen perusteella kuulut riskiryhmään.</p>"+
-                "<p>Alueellasi on mahdollisesti alkamassa norovirusepidemia %t. Muista pestä kädet säännöllisesti ja käyttää käsidesiä.</p>"+
+                "<p>Alueellasi on mahdollisesti alkamassa norovirusepidemia %t. </p>"+
+                "<p>Muista pestä kädet säännöllisesti ja käyttää käsidesiä.</p>"+
+                "<p>Antamiesi tietojen perusteella kuulut riskiryhmään.</p>"+        
                 "<p>Lue lisätietoa noroviruksesta <a href=\"http://www.terveyskirjasto.fi/terveyskirjasto/tk.koti?p_artikkeli=dlk00738\" target=\"_blank\">Terveyskirjastosta</a>.</p>");
         mediumRiskGroup.put(EpidemicSituation.ONGOING, "<p>Antamiesi tietojen perusteella kuulut riskiryhmään.</p>"+
                                                        "<p>Alueellasi on meneillään norovirusepidemia. Muista pestä kädet säännöllisesti ja käyttää käsidesiä.</p>");    
         Map<EpidemicSituation, String> highRiskGroup =new HashMap<EpidemicSituation, String>();
         highRiskGroup.put(EpidemicSituation.EXPECTED, 
-                "<p>Antamiesi tietojen perusteella kuulut korkean riskin ryhmään.</p><p>Alueellasi on mahdollisesti alkamassa norovirusepidemia %t. </p><p>Muista pestä kädet säännöllisesti ja käyttää käsidesiä. "+
+                "<p>Alueellasi on mahdollisesti alkamassa norovirusepidemia %t. </p>"+
+                "<p>Antamiesi tietojen perusteella kuulut korkean riskin ryhmään.</p>"+
+                "<p>Muista pestä kädet säännöllisesti ja käyttää käsidesiä. "+
                 "Vältä kontaktia sairastuneiden perheenjäsenten kanssa. </p><p><strong>Oireiden ilmetessä hakeudu lääkärihoitoon.</strong></p>"+
                 "<p>Lue lisätietoa noroviruksesta <a href=\"http://www.terveyskirjasto.fi/terveyskirjasto/tk.koti?p_artikkeli=dlk00738\" target=\"_blank\">Terveyskirjastosta</a>.</p>");
-        highRiskGroup.put(EpidemicSituation.ONGOING, 
-                "<p>Antamiesi tietojen perusteella kuulut korkean riskin ryhmään.</p><p>Alueellasi on meneillään norovirusepidemia. </p><p>Muista pestä kädet säännöllisesti ja käyttää käsidesiä. "+
+        highRiskGroup.put(EpidemicSituation.ONGOING,                 
+                "<p>Alueellasi on meneillään norovirusepidemia. </p>"+
+                "<p>Antamiesi tietojen perusteella kuulut korkean riskin ryhmään.</p>"+
+                "<p>Muista pestä kädet säännöllisesti ja käyttää käsidesiä. "+
                 "Vältä kontaktia sairastuneiden perheenjäsenten kanssa. </p><p><strong>Oireiden ilmetessä hakeudu lääkärihoitoon.</strong></p>"+
                 "<p>Lue lisätietoa noroviruksesta <a href=\"http://www.terveyskirjasto.fi/terveyskirjasto/tk.koti?p_artikkeli=dlk00738\" target=\"_blank\">Terveyskirjastosta</a>.</p>");
         
@@ -63,9 +70,9 @@ public class DssService {
             }
         }
         int riskGroup = 0;
-        if (age >= 80 || health < 3){
+        if (age >= 80 || age <= 2 || health <= 2){
             riskGroup = 2;
-        }else if (age >= 70 || health < 5){
+        }else if (age >= 70 || age <= 4 || health <= 4){
             riskGroup = 1;
         }
         if (situation == EpidemicSituation.NO_EPIDEMIC){
