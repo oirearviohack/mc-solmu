@@ -22,16 +22,18 @@ public class DssService {
         actions = new HashMap<Integer, Map<EpidemicSituation, String>>();
         Map<EpidemicSituation, String> lowRiskGroup =new HashMap<EpidemicSituation, String>();
         lowRiskGroup.put(EpidemicSituation.EXPECTED, "Alueellasi on mahdollisesti alkamassa epidemia %t. Muista pestä kädet säännöllisesti.");
-        lowRiskGroup.put(EpidemicSituation.ONGOING, "Epidemia meneillään alueellasi. Muista pestä kädet säännöllisesti.");
+        lowRiskGroup.put(EpidemicSituation.ONGOING, "Alueellasi on meneillään epidemia. Muista pestä kädet säännöllisesti.");
         Map<EpidemicSituation, String> mediumRiskGroup =new HashMap<EpidemicSituation, String>();
         mediumRiskGroup.put(EpidemicSituation.EXPECTED, 
                 "Alueellasi on mahdollisesti alkamassa epidemia %t. Muista pestä kädet säännöllisesti ja käyttää käsidesiä.");
-        mediumRiskGroup.put(EpidemicSituation.ONGOING, "Epidemia meneillään alueellasi. Muista pestä kädet säännöllisesti ja käyttää käsidesiä.");    
+        mediumRiskGroup.put(EpidemicSituation.ONGOING, "Alueellasi on meneillään epidemia. Muista pestä kädet säännöllisesti ja käyttää käsidesiä.");    
         Map<EpidemicSituation, String> highRiskGroup =new HashMap<EpidemicSituation, String>();
         highRiskGroup.put(EpidemicSituation.EXPECTED, 
-                "Alueellasi on mahdollisesti alkamassa epidemia %t. Muista pestä kädet säännöllisesti ja käyttää käsidesiä. Oireiden ilmetessä hakeudu lääkärihoitoon.");
+                "Alueellasi on mahdollisesti alkamassa epidemia %t. Muista pestä kädet säännöllisesti ja käyttää käsidesiä. "+
+                "Vältä kontaktia sairastuneiden perheenjäsenten kanssa. Oireiden ilmetessä hakeudu lääkärihoitoon.");
         highRiskGroup.put(EpidemicSituation.ONGOING, 
-                "Epidemia meneillään alueellasi. Muista pestä kädet säännöllisesti ja käyttää käsidesiä. Oireiden ilmetessä hakeudu lääkärihoitoon.");
+                "Alueellasi on meneillään epidemia. Muista pestä kädet säännöllisesti ja käyttää käsidesiä. "+
+                "Vältä kontaktia sairastuneiden perheenjäsenten kanssa. Oireiden ilmetessä hakeudu lääkärihoitoon.");
         
         actions.put(0, lowRiskGroup);
         actions.put(1, mediumRiskGroup);
