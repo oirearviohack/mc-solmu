@@ -23,14 +23,14 @@ public class GeometryMain {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setContentPane(panel);
         frame.pack();
-        frame.setVisible(true);
+        //frame.setVisible(true);
         //System.exit(0);
-        //panel.syncSet(getGeopointSet(1));
-        //(new Thread(new GeometryMain())).start();
+        /*
         for (int i = 0; i < 86; i++) {
             panel.syncSet(getGeopointSet(i));
             Thread.sleep(200);
         }
-        //System.out.println(getGeopointSet(30).getConvexHull().exportGeoPolygon());
+        */
+        System.out.println(getGeopointSet(30).getConvexHull().exportGeoJSON());
     }
 }

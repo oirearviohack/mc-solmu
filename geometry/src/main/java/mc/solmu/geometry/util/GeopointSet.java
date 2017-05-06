@@ -122,9 +122,13 @@ public class GeopointSet {
         return result;
     }
 
-    public String exportGeoPolygon() {
-        return "{\"type\":\"Polygon\", \"coordinates\":[["
+    public String exportGeoJSON() {
+        return "{\"type\": \"FeatureCollection\","
+                //+ "\"crs\": {\"type\": \"name\",\"properties\": {\"name\": \"EPSG:4326\"}},"
+                + "\"features\": [{\"type\":\"Feature\",\"geometry\":"
+                + "{\"type\":\"Polygon\", \"coordinates\":[["
                 + set.stream().map(p -> p.exportGeoJson()).collect(Collectors.joining(","))
-                + "]]}";
+                + "]]},\"properties\":{\"name\":\"convex hull\"}"
+                + "}]}";
     }
 }

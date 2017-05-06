@@ -49,6 +49,7 @@ public class Geopoint extends Point2D.Double {
     }
 
     public String exportGeoJson() {
+        //return "ol.proj.fromLonLat([" + x + "," + y + "])";
         return "[" + x + "," + y + "]";
     }
 }
