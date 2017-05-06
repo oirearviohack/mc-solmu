@@ -5,13 +5,15 @@ import HeaderContainer from '../header/headerContainer'
 import Slideout from '../ui/slideout/slideoutComponent'
 import Navigation from '../navigation/navigationComponent'
 import Map from '../map/mapComponent'
+import Panel from '../ui/panel/panelComponent'
 
 export default class App extends React.Component {
   static propTypes = {
     toggleNavigation: PropTypes.func.isRequired,
     isNavigationOpen: PropTypes.bool.isRequired,
     getEpidemicLocationData: PropTypes.func.isRequired,
-    epidemicLocationData: PropTypes.object
+    epidemicLocationData: PropTypes.object,
+    DSSData: PropTypes.string
   }
 
   pollInterval = null
@@ -21,7 +23,8 @@ export default class App extends React.Component {
       toggleNavigation,
       isNavigationOpen,
       epidemicLevel,
-      epidemicLocationData
+      epidemicLocationData,
+      DSSData
     } = this.props
 
     return (
@@ -35,14 +38,18 @@ export default class App extends React.Component {
               <div className="wrapper">
                 <div className="row">
                   <div className="col-xs-6">
-                    <div className="pn-Panel">
-                      <h1>{epidemicLevel}</h1>
-                    </div>
+                    <Panel>
+                      {
+                        DSSData && (
+                          <h1 className="animated fadeIn">{DSSData}</h1>
+                        )
+                      }
+                    </Panel>
                   </div>
                   <div className="col-xs-6">
-                    <div className="pn-Panel">
+                    <Panel>
                       <Map data={epidemicLocationData} />
-                    </div>
+                    </Panel>
                   </div>
                 </div>
               </div>

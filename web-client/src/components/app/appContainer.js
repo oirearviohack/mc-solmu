@@ -7,7 +7,8 @@ import {getEpidemicLocationData} from '../epidemic/epidemicReducer'
 const mapStateToProps = state => ({
   isNavigationOpen: state.ui.isNavigationOpen,
   epidemicLocationData: state.epidemic.epidemicLocationData,
-  epidemicLevel: state.epidemic.epidemicLevel
+  epidemicLevel: state.epidemic.epidemicLevel,
+  DSSData: state.epidemic.DSSData
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
