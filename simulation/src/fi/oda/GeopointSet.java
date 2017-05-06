@@ -9,7 +9,9 @@ public class GeopointSet {
     public GeopointSet() {
         set = new ArrayList<>();
     }
-
+    public int getSize(){
+        return set.size();
+    }
     public GeopointSet(GeopointSet original) {
         this();
         original.set.stream().forEach(p->set.add(new Geopoint(p)));

@@ -153,10 +153,13 @@ public class Convert {
     private static void writePolys(Path polyFile, GeoJson json, int percentage) throws JsonGenerationException, JsonMappingException, IOException{
         if (json.features.length < 4){
             return;
-        }
+        }      
         GeopointSet gp = new GeopointSet(om.writeValueAsString(json));
-        String gpString = gp.getFraction(percentage).getConvexHull().exportGeoJSON();
-        Files.write(polyFile, gpString.getBytes());
+        gp = gp.getFraction(percentage).getConvexHull();
+        if (gp.getSize() < 4){
+            return;
+        }       
+        Files.write(polyFile, gp.exportGeoJSON().getBytes());
 
     }
 }

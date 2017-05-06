@@ -3,7 +3,9 @@ package fi.oda.epidemic.service;
 import org.springframework.stereotype.Service;
 
 import fi.oda.epidemic.simulation.EpidemicMap;
-
+/**
+ *
+ */
 @Service
 public class EpidemicService {
     private EpidemicMap epidemicMap;
