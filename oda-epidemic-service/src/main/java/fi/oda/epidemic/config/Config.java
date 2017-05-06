@@ -38,7 +38,7 @@ public class Config  {
         catch (IOException e) {
             e.printStackTrace();
         }
-        GeoJson[] predictedData;// = new GeoJson[168];
+        GeoJson[] predictedData;
         List<GeoJson> g = new ArrayList<GeoJson>();
         for (int index = 1; index < 168; index++){
             try (BufferedReader reader = new BufferedReader(
@@ -47,7 +47,6 @@ public class Config  {
                 if (geojson != null){
                     g.add(geojson);
                 }
-                //predictedData[index -1] = om.readValue(reader, GeoJson.class);
             }
             catch (IOException e) {
                 e.printStackTrace();

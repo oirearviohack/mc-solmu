@@ -1,5 +1,8 @@
 package fi.oda.dss.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -12,20 +15,23 @@ import fi.oda.dss.EpidemicSituation;
 @Service
 public class DssService {
     private Map<Integer, Map<EpidemicSituation, String>> actions;
+    
+    private double timestepHours = 1.0;
+    
     public DssService(){
         actions = new HashMap<Integer, Map<EpidemicSituation, String>>();
         Map<EpidemicSituation, String> lowRiskGroup =new HashMap<EpidemicSituation, String>();
-        lowRiskGroup.put(EpidemicSituation.EXPECTED, "Mahdollinen epidemia tulossa. Muista pestä kädet säännöllisesti.");
-        lowRiskGroup.put(EpidemicSituation.ONGOING, "Epidemia meneillään. Muista pestä kädet säännöllisesti.");
+        lowRiskGroup.put(EpidemicSituation.EXPECTED, "Alueellasi on mahdollisesti alkamassa epidemia %t. Muista pestä kädet säännöllisesti.");
+        lowRiskGroup.put(EpidemicSituation.ONGOING, "Epidemia meneillään alueellasi. Muista pestä kädet säännöllisesti.");
         Map<EpidemicSituation, String> mediumRiskGroup =new HashMap<EpidemicSituation, String>();
         mediumRiskGroup.put(EpidemicSituation.EXPECTED, 
-                "Mahdollinen epidemia tulossa. Muista pestä kädet säännöllisesti ja käyttää käsidesiä.");
-        mediumRiskGroup.put(EpidemicSituation.ONGOING, "Epidemia meneillään. Muista pestä kädet säännöllisesti ja käyttää käsidesiä.");    
+                "Alueellasi on mahdollisesti alkamassa epidemia %t. Muista pestä kädet säännöllisesti ja käyttää käsidesiä.");
+        mediumRiskGroup.put(EpidemicSituation.ONGOING, "Epidemia meneillään alueellasi. Muista pestä kädet säännöllisesti ja käyttää käsidesiä.");    
         Map<EpidemicSituation, String> highRiskGroup =new HashMap<EpidemicSituation, String>();
         highRiskGroup.put(EpidemicSituation.EXPECTED, 
-                "Mahdollinen epidemia tulossa. Muista pestä kädet säännöllisesti ja käyttää käsidesiä. Oireiden ilmetessä hakeudu lääkärihoitoon.");
+                "Alueellasi on mahdollisesti alkamassa epidemia %t. Muista pestä kädet säännöllisesti ja käyttää käsidesiä. Oireiden ilmetessä hakeudu lääkärihoitoon.");
         highRiskGroup.put(EpidemicSituation.ONGOING, 
-                "Epidemia meneillään. Muista pestä kädet säännöllisesti ja käyttää käsidesiä. Oireiden ilmetessä hakeudu lääkärihoitoon.");
+                "Epidemia meneillään alueellasi. Muista pestä kädet säännöllisesti ja käyttää käsidesiä. Oireiden ilmetessä hakeudu lääkärihoitoon.");
         
         actions.put(0, lowRiskGroup);
         actions.put(1, mediumRiskGroup);
@@ -38,10 +44,14 @@ public class DssService {
         double currentLevel = findMax(0, 1, epidemicLevel);
         int lastIndex = epidemicLevel.length - 1;
         EpidemicSituation situation = EpidemicSituation.NO_EPIDEMIC;   
+        int firstIndex = 0;
         if (currentLevel > 0.5){
             situation = EpidemicSituation.ONGOING;
-        }else if (findMax(0, lastIndex, epidemicLevel) > 0.5){
-            situation = EpidemicSituation.EXPECTED;
+        }else{
+            firstIndex = findFirstOverThreshold(0, lastIndex, epidemicLevel, 0.5);
+            if (firstIndex != -1){
+                situation = EpidemicSituation.EXPECTED;    
+            }
         }
         int riskGroup = 0;
         if (age >= 80 || health < 3){
@@ -52,7 +62,14 @@ public class DssService {
         if (situation == EpidemicSituation.NO_EPIDEMIC){
             return Optional.empty();
         }
-        return Optional.of(actions.get(riskGroup).get(situation));
+        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+        String message = actions.get(riskGroup).get(situation);
+        int hours = (int)(firstIndex * timestepHours);
+        Calendar cal = Calendar.getInstance(); // creates calendar
+        cal.setTime(new Date()); // sets calendar time/date
+        cal.add(Calendar.HOUR_OF_DAY, hours); // adds one hour
+        message = message.replace("%t", format.format(cal.getTime()));
+        return Optional.of(message);
         
     }
     private double findMax(int startIndex, int endIndex, double[] epidemicLevel){
@@ -71,5 +88,19 @@ public class DssService {
         }
         return max;
     }
-    
+    private int findFirstOverThreshold(int startIndex, int endIndex, double[] epidemicLevel, double threshold){
+        if (endIndex >= epidemicLevel.length){
+            endIndex = epidemicLevel.length - 1;
+        }
+        if (startIndex >= epidemicLevel.length){
+            startIndex = epidemicLevel.length - 1;
+        }      
+        int i;
+        for (i = startIndex; i <= endIndex; i++){
+            if (epidemicLevel[i] > threshold){
+                return i;
+            }
+        }
+        return -1;
+    }
 }
