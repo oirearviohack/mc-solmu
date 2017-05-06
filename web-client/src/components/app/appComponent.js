@@ -41,7 +41,7 @@ export default class App extends React.Component {
                     <Panel>
                       {
                         DSSData ? (
-                          <h1 className="animated fadeIn">{DSSData}</h1>
+                          <div className="app-DSSResult" dangerouslySetInnerHTML={{__html: DSSData}} />
                         ) : (
                           <p className="animated fadeIn">Toimenpiteitä ei tarvita</p>
                         )

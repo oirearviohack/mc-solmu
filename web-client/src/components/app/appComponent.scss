@@ -3,6 +3,7 @@
 .app-MainContent {
   min-height: 100vh;
 
+  font-size: 1rem;
   background: #141E30;
   background: linear-gradient(to right, #141E30, #243B55);
   color: $white;
@@ -10,4 +11,12 @@
 
 .app-PageContent {
   padding: 1rem;
+}
+
+.app-DSSResult {
+  font-size: 1.5em;
+}
+
+a {
+  color: $white;
 }
