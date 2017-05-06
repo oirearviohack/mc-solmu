@@ -139,7 +139,7 @@ export default class OpenLayersMap {
         anchor: [0.5, 46],
         anchorXUnits: 'fraction',
         anchorYUnits: 'pixels',
-        src: '/static/images/home_location.png'
+        src: '/static/images/homepin_location_64.png'
       })
     })
 
