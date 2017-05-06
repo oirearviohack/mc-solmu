@@ -5,7 +5,7 @@ import classnames from 'classnames'
 import './slideoutComponent.scss'
 
 const DEFAULT_OPTIONS = {
-  padding: 256,
+  padding: 300,
   tolerance: 70,
   easing: 'cubic-bezier(.32,2,.55,.27)'
 }

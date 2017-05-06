@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import './appComponent.scss'
 import HeaderContainer from '../header/headerContainer'
 import Slideout from '../ui/slideout/slideoutComponent'
-import Navigation from '../navigation/navigationComponent'
 import Map from '../map/mapComponent'
 import Panel from '../ui/panel/panelComponent'
+import UserProfileContainer from '../userProfile/userProfileContainer'
 
 export default class App extends React.Component {
   static propTypes = {
@@ -29,7 +29,7 @@ export default class App extends React.Component {
 
     return (
       <div className="app-AppContainer">
-        <Slideout menuComponent={Navigation} onTranslateEnd={toggleNavigation} isOpen={isNavigationOpen}>
+        <Slideout menuComponent={UserProfileContainer} onTranslateEnd={toggleNavigation} isOpen={isNavigationOpen}>
           <main className="app-MainContent">
             <HeaderContainer />
 

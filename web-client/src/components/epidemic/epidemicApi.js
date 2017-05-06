@@ -16,14 +16,14 @@ export const fetchNextSimulationFrame = level => {
 }
 
 export const fetchEpidemicLevel = (lat, lon, time) =>
-  fetch(`//0.0.0.0:6085/epidemic-level?lat=${lat}&lon=${lon}&t=${time}`).then(data => data.json())
+  fetch(`//localhost:6085/epidemic-level?lat=${lat}&lon=${lon}&t=${time}`).then(data => data.json())
 
 const parseDSSResult = R.pipe(
   R.values,
   R.head
 )
 
-export const queryDSS = (epidemicLevel, age, healthLevel) => fetch('//0.0.0.0:6086/dss', {
+export const queryDSS = (epidemicLevel, age, healthLevel) => fetch('//localhost:6086/dss', {
   ...POSTHeaders,
   body: JSON.stringify({
     epidemicLevel: [epidemicLevel],

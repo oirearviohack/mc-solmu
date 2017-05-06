@@ -2,8 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './headerComponent.scss'
 import Icon from '../ui/icon/iconComponent'
+import HamburgerIcon from '../ui/hamburgerIcon/hamburgerIconComponent'
 
-const Header = ({toggleNavigation}) => (
+const Header = ({toggleNavigation, isNavigationOpen}) => (
   <header className="hd-Header">
     <div className="row middle-xs">
       <div className="col-xs-6">
@@ -20,7 +21,7 @@ const Header = ({toggleNavigation}) => (
         <button className="hd-UserControls" onClick={toggleNavigation}>
           Omat tietoni
 
-          <Icon glyph="avatar" className="hd-UserControls_Button" />
+          <HamburgerIcon isOpen={isNavigationOpen} />
         </button>
       </div>
     </div>
