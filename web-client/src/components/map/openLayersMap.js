@@ -32,6 +32,10 @@ export default class OpenLayersMap {
     })
 
     const styles = {
+      'Polygon': new ol.style.Style({
+        fill: new ol.style.Fill({color:[0,0,255,0.2]}),
+        stroke: new ol.style.Stroke({color: 'blue', width: 1})        
+      }),
       'Point': new ol.style.Style({image})
     }
 
