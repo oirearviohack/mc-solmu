@@ -10,10 +10,9 @@ const POSTHeaders =  {
   }
 }
 
-
-export const fetchNextSimulationFrame = () => {
+export const fetchNextSimulationFrame = level => {
   frame = frame > maxFrame ? 0 : frame
-  return fetch(`/static/simulations/epidemic3/polys100_${frame++}.json`).then(data => data.json())
+  return fetch(`/static/simulations/epidemic3/polys${level}_${frame++}.json`).then(data => data.json())
 }
 
 export const fetchEpidemicLevel = (lat, lon, time) =>

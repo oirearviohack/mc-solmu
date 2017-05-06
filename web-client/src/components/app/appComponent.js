@@ -12,7 +12,7 @@ export default class App extends React.Component {
     toggleNavigation: PropTypes.func.isRequired,
     isNavigationOpen: PropTypes.bool.isRequired,
     getEpidemicLocationData: PropTypes.func.isRequired,
-    epidemicLocationData: PropTypes.object,
+    epidemicLocationData: PropTypes.array,
     DSSData: PropTypes.string,
     isLoadingDSSData: PropTypes.bool.isRequired
   }
@@ -50,7 +50,7 @@ export default class App extends React.Component {
                   </div>
                   <div className="col-xs-6">
                     <Panel>
-                      <Map data={epidemicLocationData} />
+                      <Map dataSets={epidemicLocationData} />
                     </Panel>
                   </div>
                 </div>

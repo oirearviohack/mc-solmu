@@ -8,19 +8,18 @@ import './mapComponent.scss'
 
 export default class Map extends React.Component {
   static propTypes = {
-    data: PropTypes.object
+    dataSets: PropTypes.array
   }
 
   containerId = 'js-map' + new Date().getTime()
 
   componentWillReceiveProps(nextProps) {
-    this.map.updateVectorSource(nextProps.data)
+    this.map.updateMap(nextProps.dataSets)
   }
 
   render = () => <div className="map-Map" id={this.containerId} />
 
   componentDidMount() {
-    this.map = new OpenLayersMap(this.containerId, this.props.data)
+    this.map = new OpenLayersMap(this.containerId)
   }
-  
 }

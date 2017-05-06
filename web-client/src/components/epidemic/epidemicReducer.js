@@ -70,7 +70,12 @@ export const receiveDSSData = data => ({
 export const getEpidemicLocationData = () => {
   return dispatch => {
     dispatch(pollEpidemicLocationData())
-    fetchNextSimulationFrame().then(data => dispatch(receiveEpidemicLocationData(data)))
+    Promise.all([
+      fetchNextSimulationFrame(50),
+      fetchNextSimulationFrame(80),
+      fetchNextSimulationFrame(100)
+    ])
+    .then(data => dispatch(receiveEpidemicLocationData(data)))
   }
 }
 

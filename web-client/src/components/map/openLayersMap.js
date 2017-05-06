@@ -42,7 +42,7 @@ const formatData = data => ({
 export const getStyleByFeatureType = (styles, feature) => styles[feature.getGeometry().getType()]
 
 export default class OpenLayersMap {
-  constructor(selector, rawFeatureData) {
+  constructor(selector) {
     const image = new ol.style.Circle({
       radius: 5,
       fill: new ol.style.Fill({color: 'red'}),
@@ -57,11 +57,7 @@ export default class OpenLayersMap {
       'Point': new ol.style.Style({image})
     }
 
-    const vectorSourceOptions = rawFeatureData ?
-      {features: new ol.format.GeoJSON().readFeatures(formatData(rawFeatureData))} :
-      {}
-
-    this.vectorSource = new ol.source.Vector(vectorSourceOptions)
+    this.vectorSource = new ol.source.Vector()
     this.vectorSourcePinned = new ol.source.Vector()
 
     this.vectorLayer = new ol.layer.Vector({
@@ -93,6 +89,7 @@ export default class OpenLayersMap {
         zoom: 9
       })
     })
+
     this.setUserLocation()
   }
 
@@ -127,22 +124,13 @@ export default class OpenLayersMap {
     })
   }
 
-  updateVectorSource = rawFeatureData => {
-    if (!rawFeatureData) {
-      return
-    }
-
+  updateHomePin = () => {
     const pointsOfInterest = {
       geometry: new ol.geom.Point(ol.proj.fromLonLat([24.847530717623886, 60.32469782329352])),
       properties: {
         name: 'Home-location'
       }
     }
-
-    const formattedFeatures = formatData(rawFeatureData)
-
-    this.vectorSource.clear()
-    this.vectorSource.addFeatures(new ol.format.GeoJSON().readFeatures(formattedFeatures))
 
     var iconFeature = new ol.Feature(pointsOfInterest)
 
@@ -158,5 +146,25 @@ export default class OpenLayersMap {
     iconFeature.setStyle(iconStyle)
 
     this.vectorSource.addFeature(iconFeature)
+  }
+
+  updateDataLayer = rawFeatureData => {
+    if (!rawFeatureData) {
+      return
+    }
+
+    const formattedFeatures = formatData(rawFeatureData)
+
+    this.vectorSource.clear()
+    this.vectorSource.addFeatures(new ol.format.GeoJSON().readFeatures(formattedFeatures))
+  }
+
+  updateMap = dataSets => {
+    if (!dataSets || R.empty(dataSets)) {
+      return
+    }
+
+    dataSets.map(this.updateDataLayer)
+    this.updateHomePin()
   }
 }
