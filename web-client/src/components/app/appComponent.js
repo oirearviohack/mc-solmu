@@ -6,15 +6,19 @@ import Slideout from '../ui/slideout/slideoutComponent'
 import Map from '../map/mapComponent'
 import Panel from '../ui/panel/panelComponent'
 import UserProfileContainer from '../userProfile/userProfileContainer'
+import Icon from '../ui/icon/iconComponent'
 
 export default class App extends React.Component {
   static propTypes = {
     toggleNavigation: PropTypes.func.isRequired,
     isNavigationOpen: PropTypes.bool.isRequired,
+    getEpidemicLocationDataForHomeLocation: PropTypes.func.isRequired,
     getEpidemicLocationData: PropTypes.func.isRequired,
     epidemicLocationData: PropTypes.array,
     DSSData: PropTypes.string,
-    isLoadingDSSData: PropTypes.bool.isRequired
+    DSSDataHome: PropTypes.string,
+    isLoadingDSSData: PropTypes.bool.isRequired,
+    address: PropTypes.string
   }
 
   pollInterval = null
@@ -24,7 +28,9 @@ export default class App extends React.Component {
       toggleNavigation,
       isNavigationOpen,
       epidemicLocationData,
-      DSSData
+      DSSData,
+      DSSDataHome,
+      address
     } = this.props
 
     return (
@@ -39,13 +45,41 @@ export default class App extends React.Component {
                 <div className="row">
                   <div className="col-xs-6">
                     <Panel>
-                      {
-                        DSSData ? (
-                          <div className="app-DSSResult" dangerouslySetInnerHTML={{__html: DSSData}} />
-                        ) : (
-                          <p className="animated fadeIn">Toimenpiteitä ei tarvita</p>
-                        )
-                      }
+                      <section className="app-DSSSection">
+                        <h2 className="app-DSSSection_Title">
+                          <span className="app-DSSSection_IconWrapper">
+                            <Icon glyph="location" />
+                          </span>
+                          Tämänhetkinen sijaintisi
+                        </h2>
+                        {
+                          DSSData ? (
+                            <div className="app-DSSResult animated fadeIn" dangerouslySetInnerHTML={{__html: DSSData}} />
+                          ) : (
+                            <div className="app-DSSResult animated fadeIn">
+                              <p>Alueella ei tarvita erityistoimenpiteitä.</p>
+                            </div>
+                          )
+                        }
+                      </section>
+
+                      <section className="app-DSSSection">
+                        <h2 className="app-DSSSection_Title">
+                          <span className="app-DSSSection_IconWrapper">
+                            <Icon glyph="web-page-home" />
+                          </span>
+                          { address }
+                        </h2>
+                        {
+                          DSSDataHome ? (
+                            <div className="app-DSSResult animated fadeIn" dangerouslySetInnerHTML={{__html: DSSDataHome}} />
+                          ) : (
+                            <div className="app-DSSResult animated fadeIn">
+                              <p>Alueella ei tarvita erityistoimenpiteitä.</p>
+                            </div>
+                          )
+                        }
+                      </section>
                     </Panel>
                   </div>
                   <div className="col-xs-6">
@@ -67,6 +101,8 @@ export default class App extends React.Component {
     if (!this.pollInterval) {
       this.pollInterval = setInterval(this.props.getEpidemicLocationData, 500)
     }
+
+    setTimeout(this.props.getEpidemicLocationDataForHomeLocation, 500)
   }
 
   componentWillUnmount() {

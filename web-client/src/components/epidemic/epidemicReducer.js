@@ -4,6 +4,7 @@ const POLL_EPIDEMIC_LOCATION_DATA = 'app/epidemic/POLL_EPIDEMIC_LOCATION_DATA'
 const RECEIVE_EPIDEMIC_LOCATION_DATA = 'app/epidemic/RECEIVE_EPIDEMIC_LOCATION_DATA'
 const POLL_DSS_DATA = 'app/epidemic/POLL_DSS_DATA'
 const RECEIVE_DSS_DATA = 'app/epidemic/RECEIVE_DSS_DATA'
+const RECEIVE_DSS_DATA_HOME = 'app/epidemic/RECEIVE_DSS_DATA_HOME'
 const UPDATE_USER_DATA = 'app/epidemic/UPDATE_USER_DATA'
 const DATA_MISSING = 'app/epidemic/DATA_MISSING'
 const UPDATE_EPIDEMIC_LEVEL = 'app/epidemic/SET_EPIDEMIC_LEVEL'
@@ -13,11 +14,12 @@ const initialState = {
   isLoadingEpidemicLocationData: false,
   isLoadingDSSData: false,
   DSSData: null,
+  DSSDataHome: null,
   epidemicLevel: [],
   userData: {
     address: 'Mustankivenkuja 5, Espoo',
-    healthLevel: 5,
-    age: 80,
+    healthLevel: '7',
+    age: '40',
     email: 'antti.biootti@gmail.com'
   }
 }
@@ -49,6 +51,13 @@ export default function epidemicReducer(state = initialState, action) {
         ...state,
         isLoadingDSSData: false,
         DSSData: action.data
+      }
+    }
+    case RECEIVE_DSS_DATA_HOME: {
+      return {
+        ...state,
+        isLoadingDSSData: false,
+        DSSDataHome: action.data
       }
     }
     case UPDATE_USER_DATA: {
@@ -90,6 +99,11 @@ export const receiveDSSData = data => ({
   data
 })
 
+export const receiveDSSDataForHome = data => ({
+  type: RECEIVE_DSS_DATA_HOME,
+  data
+})
+
 export const dataMissing = () => ({
   type: DATA_MISSING
 })
@@ -119,20 +133,35 @@ export const getEpidemicLocationData = () => {
   }
 }
 
-export const getEpidemicLevelData = (lat, lon, time) => {
+export const getEpidemicLocationDataForHomeLocation = () => {
+  return dispatch => {
+    fetchEpidemicLevel(60.32469782329352, 24.847530717623886).then(data => {
+      dispatch(postDSSDataForHome(data))
+    })
+  }
+}
+
+export const getEpidemicLevelData = (lat, lon) => {
   return dispatch => {
     dispatch(pollDSSData())
-    fetchEpidemicLevel(lat, lon, time).then(data => {
+    fetchEpidemicLevel(lat, lon).then(data => {
       dispatch(setEpidemicLevel(data))
       dispatch(postDSSData(data))
     })
   }
 }
 
-export const postDSSData = (epidemicLevel) => {
+export const postDSSData = epidemicLevel => {
   return (dispatch, getState) => {
     const {epidemic: {userData: {age, healthLevel}}} = getState()
     queryDSS(epidemicLevel, age, healthLevel).then(data => dispatch(receiveDSSData(data)))
+  }
+}
+
+export const postDSSDataForHome = epidemicLevel => {
+  return (dispatch, getState) => {
+    const {epidemic: {userData: {age, healthLevel}}} = getState()
+    queryDSS(epidemicLevel, age, healthLevel).then(data => dispatch(receiveDSSDataForHome(data)))
   }
 }
 
@@ -141,5 +170,6 @@ export const updateUserData = data => {
     const {epidemic: {epidemicLevel}} = getState()
     dispatch(setUserData(data))
     dispatch(postDSSData(epidemicLevel))
+    dispatch(postDSSDataForHome(epidemicLevel))
   }
 }

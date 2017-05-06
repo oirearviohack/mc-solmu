@@ -15,7 +15,7 @@ export const fetchNextSimulationFrame = level => {
   return fetch(`/static/simulations/epidemic3/polys${level}_${frame++}.json`).then(data => data.json())
 }
 
-export const fetchEpidemicLevel = (lat, lon, time) =>
+export const fetchEpidemicLevel = (lat, lon) =>
   fetch(`//localhost:6085/epidemic-level/all?lat=${lat}&lon=${lon}&t=0`).then(data => data.json())
 
 const parseDSSResult = R.pipe(
