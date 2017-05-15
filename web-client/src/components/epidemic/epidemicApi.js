@@ -13,11 +13,11 @@ const getWindowOrigin = () => window.location.origin || window.location.protocol
 
 export const fetchNextSimulationFrame = level => {
   frame = frame > maxFrame ? 0 : frame
-  return fetch(getWindowOrigin() + "/static/simulations/epidemic3/polys${level}_${frame++}.json").then(data => data.json())
+  return fetch(getWindowOrigin() + `/static/simulations/epidemic3/polys${level}_${frame++}.json`).then(data => data.json())
 }
 
 export const fetchEpidemicLevel = (lat, lon) =>
-  fetch(getWindowOrigin() + ":6085/epidemic-level/all?lat=${lat}&lon=${lon}&t=0").then(data => data.json())
+  fetch(getWindowOrigin() + `:6085/epidemic-level/all?lat=${lat}&lon=${lon}&t=0`).then(data => data.json())
 
 const parseDSSResult = R.pipe(
   R.values,
