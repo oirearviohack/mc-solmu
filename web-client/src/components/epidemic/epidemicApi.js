@@ -9,7 +9,7 @@ const POSTHeaders =  {
     'Content-Type': 'application/json'
   }
 }
-const getWindowOrigin = () => window.location.origin || window.location.protocol + '//' + window.location.hostname
+const getWindowOrigin = () => window.location.protocol + '//' + window.location.hostname
 
 export const fetchNextSimulationFrame = level => {
   frame = frame > maxFrame ? 0 : frame
