@@ -9,21 +9,22 @@ const POSTHeaders =  {
     'Content-Type': 'application/json'
   }
 }
+const getWindowOrigin = () => window.location.origin || window.location.protocol + '//' + window.location.hostname
 
 export const fetchNextSimulationFrame = level => {
   frame = frame > maxFrame ? 0 : frame
-  return fetch(`/static/simulations/epidemic3/polys${level}_${frame++}.json`).then(data => data.json())
+  return fetch(getWindowOrigin() + "/static/simulations/epidemic3/polys${level}_${frame++}.json").then(data => data.json())
 }
 
 export const fetchEpidemicLevel = (lat, lon) =>
-  fetch(`//localhost:6085/epidemic-level/all?lat=${lat}&lon=${lon}&t=0`).then(data => data.json())
+  fetch(getWindowOrigin() + ":6085/epidemic-level/all?lat=${lat}&lon=${lon}&t=0").then(data => data.json())
 
 const parseDSSResult = R.pipe(
   R.values,
   R.head
 )
 
-export const queryDSS = (epidemicLevel, age, healthLevel) => fetch('//localhost:6086/dss', {
+export const queryDSS = (epidemicLevel, age, healthLevel) => fetch(getWindowOrigin() + ":6086/dss", {
   ...POSTHeaders,
   body: JSON.stringify({
     epidemicLevel: epidemicLevel,
