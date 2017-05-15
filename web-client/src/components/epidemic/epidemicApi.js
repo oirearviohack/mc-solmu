@@ -13,7 +13,7 @@ const getWindowOrigin = () => window.location.protocol + '//' + window.location.
 
 export const fetchNextSimulationFrame = level => {
   frame = frame > maxFrame ? 0 : frame
-  return fetch(getWindowOrigin() + `:8081/static/simulations/epidemic3/polys${level}_${frame++}.json`).then(data => data.json())
+  return fetch(getWindowOrigin() + `:8090/static/simulations/epidemic3/polys${level}_${frame++}.json`).then(data => data.json())
 }
 
 export const fetchEpidemicLevel = (lat, lon) =>
