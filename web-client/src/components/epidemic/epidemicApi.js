@@ -17,14 +17,14 @@ export const fetchNextSimulationFrame = level => {
 }
 
 export const fetchEpidemicLevel = (lat, lon) =>
-  fetch(getWindowOrigin() + `:6085/epidemic-level/all?lat=${lat}&lon=${lon}&t=0`).then(data => data.json())
+  fetch(getWindowOrigin() + `:9085/epidemic-level/all?lat=${lat}&lon=${lon}&t=0`).then(data => data.json())
 
 const parseDSSResult = R.pipe(
   R.values,
   R.head
 )
 
-export const queryDSS = (epidemicLevel, age, healthLevel) => fetch(getWindowOrigin() + ":6086/dss", {
+export const queryDSS = (epidemicLevel, age, healthLevel) => fetch(getWindowOrigin() + ":9086/dss", {
   ...POSTHeaders,
   body: JSON.stringify({
     epidemicLevel: epidemicLevel,

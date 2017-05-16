@@ -4,7 +4,7 @@
 #    ca.uhn.fhir.rest.server: DEBUG
 
 server:
-    port: 6086
+    port: 9086
     use-forward-headers: true
     session:
         cookie:
